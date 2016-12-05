@@ -14,13 +14,23 @@ angular.module('ionicApp')
 
 
     vm.teamId=Number($stateParams.id);
+    vm.following=false;
+    vm.toggleFollow=function () {
+      vm.following=!vm.following
+    };
 
    eliteApi.getLeaguesData().success(function (data) {
      var team=_.chain(data.teams)
       .flatten('divisionTeams')
        .find(data.teams.divisionTeams,{"id":vm.teamId})
        .value();
-     console.log(team)
+     console.log(vm.team)
+
+     vm.teamStanding=_.chain(data.standings)
+       .flatten('divisionStandings')
+       .find(data.teams.divisionStandings,{'teamId':vm.teamId})
+       .value();
+
      vm.teamName=team.divisionTeams.name;
      console.log(vm.teamName)
 
