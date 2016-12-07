@@ -11,10 +11,9 @@
       var vm=this;
 
       var gameId=Number($stateParams.id);
-      eliteApi.getLeaguesData().success(function (data) {
+      eliteApi.getLeaguesData().then(function (data) {
         vm.game=_.find(data.games,{'id':gameId})
-        console.log(vm.game)
-      })
+    })
 
     }
 

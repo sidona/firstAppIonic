@@ -5,15 +5,19 @@
   'use strict';
 
   angular.module('ionicApp')
-    .controller('teamsCtrl',['eliteApi',teamsCtrl])
+    .controller('teamsCtrl',['$scope','eliteApi',teamsCtrl]);
 
-  function teamsCtrl(eliteApi) {
+  function teamsCtrl($scope,eliteApi) {
     var vm=this;
 
-    eliteApi.getLeaguesData().success(function (data) {
-      console.log(data)
+    vm.loadList=function (forceRefresh) {
+    eliteApi.getLeaguesData(forceRefresh).then(function (data) {
       vm.teams=data.teams;
+    }).finally(function () {
+      $scope.$broadcast('scroll.refreshComplete')
     })
+    };
+    vm.loadList(false);
 
   }
 })();

@@ -5,12 +5,12 @@
   'use strict';
 
   angular.module('ionicApp')
-    .controller('standingsCtrl',['eliteApi',standingsCtrl])
+    .controller('standingsCtrl',['eliteApi',standingsCtrl]);
 
   function standingsCtrl(eliteApi) {
     var vm=this;
 
-    eliteApi.getLeaguesData().success(function (data) {
+    eliteApi.getLeaguesData().then(function (data) {
       vm.standings=data.standings;
     })
   }

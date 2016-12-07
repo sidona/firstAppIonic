@@ -1,8 +1,8 @@
 /**
  * Created by Sidona on 12/2/2016.
  */
-angular.module('ionicApp',['ionic','ngResource'])
-.run(function($ionicPlatform) {
+angular.module('ionicApp',['ionic','angular-cache'])
+.run(function($ionicPlatform,CacheFactory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,6 +15,10 @@ angular.module('ionicApp',['ionic','ngResource'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    CacheFactory("leagueDataCache",{storageMode:"localStorage",maxAge:5000,deleteOnExpire:"aggressive"});
+    CacheFactory("leaguesCache",{storageMode:"localStorage",maxAge:5000,deleteOnExpire:"aggressive"});
+    CacheFactory("myTeamsCache",{storageMode:"localStorage"});
+    CacheFactory("staticCache",{storageMode:"localStorage"});
   });
 })
   .config(function ($stateProvider,$urlRouterProvider) {

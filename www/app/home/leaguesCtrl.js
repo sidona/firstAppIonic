@@ -5,14 +5,17 @@
   'use strict';
 
   angular.module('ionicApp')
-    .controller('leaguesCtrl',['eliteApi',leaguesCtrl]);
+    .controller('leaguesCtrl',['eliteApi','$state',leaguesCtrl]);
 
-  function leaguesCtrl(eliteApi) {
-    var vm=this;
+  function leaguesCtrl(eliteApi,$state) {
+    var vm = this;
 
-    var leagues=eliteApi.getLeagues();
-    var leagueData=eliteApi.getLeaguesData();
-
-    console.log(leagueData)
-  };
+    eliteApi.getLeagues().then(function (data) {
+      vm.leagues = data
+    });
+    vm.selectLeague = function (id) {
+      eliteApi.setLeagueId(id);
+      $state.go('app.teams')
+    }
+  }
 })();

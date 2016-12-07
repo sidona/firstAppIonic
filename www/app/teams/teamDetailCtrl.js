@@ -19,7 +19,7 @@ angular.module('ionicApp')
       vm.following=!vm.following
     };
 
-   eliteApi.getLeaguesData().success(function (data) {
+   eliteApi.getLeaguesData().then(function (data) {
      var team=_.chain(data.teams)
       .flatten('divisionTeams')
        .find(data.teams.divisionTeams,{"id":vm.teamId})
