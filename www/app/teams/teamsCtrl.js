@@ -10,14 +10,13 @@
   function teamsCtrl($scope,eliteApi) {
     var vm=this;
 
-    vm.loadList=function (forceRefresh) {
-    eliteApi.getLeaguesData(forceRefresh).then(function (data) {
+    vm.loadList=function () {
+    eliteApi.getLeaguesData().then(function (data) {
       vm.teams=data.teams;
     }).finally(function () {
       $scope.$broadcast('scroll.refreshComplete')
     })
     };
     vm.loadList(false);
-
   }
 })();

@@ -1,7 +1,7 @@
 /**
  * Created by Sidona on 12/2/2016.
  */
-angular.module('ionicApp',['ionic','angular-cache'])
+angular.module('ionicApp',['ionic','angular-cache','ui.router','nemLogging','uiGmapgoogle-maps'])
 .run(function($ionicPlatform,CacheFactory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -87,6 +87,14 @@ angular.module('ionicApp',['ionic','angular-cache'])
         views:{
           "mainContent":{
             templateUrl:'app/locations/locations.html'
+          }
+        }
+      })
+      .state('app.location-map',{
+        url:'/location-map/:id',
+        views:{
+          "mainContent":{
+            templateUrl:'app/locations/location-map.html'
           }
         }
       })
